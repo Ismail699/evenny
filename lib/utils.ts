@@ -109,7 +109,7 @@ export const handleError = (error: unknown) => {
 };
 
 export async function SyncUser() {
-  const { sessionClaims, } = auth();
+  const { sessionClaims } = auth();
   const userId = sessionClaims?.userId as string;
   console.log(userId);
   currentUser()
@@ -139,26 +139,26 @@ export async function SyncUser() {
               : "photo",
           };
 
-          const findUser = await User?.findOne({
-            clerkId: user?.clerkId,
-          });
+          // const findUser = await User?.findOne({
+          //   clerkId: user?.clerkId,
+          // });
 
-          if (!findUser) {
-            const newUser = await createUser(user);
-            console.log("user created");
-            if (newUser) {
-              await clerkClient.users.updateUserMetadata(
-                currentClerkUser?.id.toString() !== undefined
-                  ? currentClerkUser?.id.toString()
-                  : "",
-                {
-                  publicMetadata: {
-                    userId: newUser._id,
-                  },
-                }
-              );
-            }
-          }
+          // if (!findUser) {
+          //   const newUser = await createUser(user);
+          //   console.log("user created");
+          //   if (newUser) {
+          //     await clerkClient.users.updateUserMetadata(
+          //       currentClerkUser?.id.toString() !== undefined
+          //         ? currentClerkUser?.id.toString()
+          //         : "",
+          //       {
+          //         publicMetadata: {
+          //           userId: newUser._id,
+          //         },
+          //       }
+          //   );
+          // }
+          // }
         }
       });
     })
